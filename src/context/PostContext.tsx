@@ -40,7 +40,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   async function fetchSomePost(page: number) {
     try {
       const response: AxiosResponse<Post[]> = await axios.get(
-        "http://localhost:3030/post/some",
+        "https://opinions-server.vercel.app/post/some",
         {
           params: {
             page: page,

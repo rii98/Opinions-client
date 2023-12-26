@@ -9,7 +9,7 @@ const Form = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3030/post/create",
+        "https://opinions-server.vercel.app/post/create",
         {
           text: opinion,
         },

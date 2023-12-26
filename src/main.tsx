@@ -7,6 +7,8 @@ import PostContextProvider from "./context/PostContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <PostContextProvider>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </PostContextProvider>
 );
