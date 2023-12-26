@@ -6,6 +6,7 @@ import {
   ReactNode,
 } from "react";
 import axios, { AxiosResponse } from "axios";
+import { useSearchParams } from "react-router-dom";
 
 export interface Post {
   _id: string;
@@ -22,6 +23,9 @@ interface PostContextProps {
   error: string;
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
   fetchSomePost: (page: number) => Promise<void>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setSearchParams: any; //i have to find its type
 }
 
 interface PostContextProviderProps {
@@ -36,6 +40,13 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [page, setPage] = useState(() => {
+    const p = searchParams.get("page");
+    if (p) return Number(p);
+    else return 1;
+  });
 
   async function fetchSomePost(page: number) {
     const url =
@@ -66,21 +77,21 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     }
   }
   useEffect(() => {
-    // Create an AbortController
-    // const abortController = new AbortController();
-    // const signal = abortController.signal;
-
-    fetchSomePost(1);
-
-    // Cleanup function to abort the fetch if the component unmounts
-    // return () => {
-    //   abortController.abort();
-    // };
+    fetchSomePost(page);
   }, []);
 
   return (
     <PostContext.Provider
-      value={{ posts, loading, error, setPosts, fetchSomePost }}
+      value={{
+        posts,
+        loading,
+        error,
+        setPosts,
+        fetchSomePost,
+        setSearchParams,
+        setPage,
+        page,
+      }}
     >
       {children}
     </PostContext.Provider>

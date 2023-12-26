@@ -1,15 +1,16 @@
-import { useState } from "react";
 import { usePosts } from "../context/PostContext";
 
 const Pagination = () => {
-  const [page, setPage] = useState(1);
-  const { fetchSomePost } = usePosts();
+  const { fetchSomePost, page, setSearchParams, setPage } = usePosts();
   return (
     <div className="join">
       <button
         className="join-item btn"
         onClick={() => {
-          if (page >= 1) setPage((p) => p - 1);
+          if (page > 1) {
+            setSearchParams({ page: page - 1 });
+            setPage((p) => p - 1);
+          }
         }}
       >
         «
@@ -19,6 +20,7 @@ const Pagination = () => {
         className="join-item btn"
         onClick={() => {
           fetchSomePost(page + 1);
+          setSearchParams({ page: page + 1 });
           setPage((p) => p + 1);
         }}
       >
