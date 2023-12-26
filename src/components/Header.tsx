@@ -14,9 +14,14 @@ const Header = () => {
 
       <ul className="flex gap-4 items-center">
         <li>
-          <Link to="/profile" className="sm:text-lg">
-            Profile
-          </Link>
+          {verified && (
+            <Link
+              to={`/profile/${localStorage.getItem("id")}`}
+              className="sm:text-lg"
+            >
+              Profile
+            </Link>
+          )}
         </li>
         <li>
           <Link to="/popular" className="sm:text-lg">
