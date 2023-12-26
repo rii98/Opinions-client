@@ -12,7 +12,6 @@ const Form = () => {
         (await import.meta.env.VITE_LOCAL) === "TRUE"
           ? "http://localhost:3030/post/create"
           : "https://opinions-server.vercel.app/post/create";
-      console.log(url);
       const response = await axios.post(
         url,
         {
@@ -22,7 +21,7 @@ const Form = () => {
           withCredentials: true,
         }
       );
-      setPosts((prev) => [...prev, response.data]);
+      setPosts((prev) => [response.data, ...prev]);
     } catch (error) {
       console.log("Error while creating a new post.", error);
     }

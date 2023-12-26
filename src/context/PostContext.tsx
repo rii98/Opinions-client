@@ -52,7 +52,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
       });
 
       // if (!abortController.signal.aborted) {
-      setPosts((prevPosts) => [...prevPosts, ...response.data]);
+      setPosts((prevPosts) => [...response.data, ...prevPosts]);
       // }
     } catch (error: any) {
       if (error.name === "AbortError") {
