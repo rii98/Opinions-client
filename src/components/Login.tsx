@@ -6,10 +6,9 @@ import { useAuth } from "../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { login, authError } = useAuth();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     login(email, password);
   };
 
@@ -65,6 +64,9 @@ const Login = () => {
             </Link>
           </p>
         </form>
+        {authError && (
+          <p className="text-center text-red-600 font-bold">{authError}</p>
+        )}
       </div>
     </section>
   );

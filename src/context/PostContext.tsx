@@ -27,6 +27,8 @@ interface PostContextProps {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   setSearchParams: any; //i have to find its type
+  getPopular: () => Promise<void>;
+  popular: Post[];
 }
 
 interface PostContextProviderProps {
@@ -44,6 +46,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   const [error, setError] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const { verified, setVerified } = useAuth();
+  const [popular, setPopular] = useState<Post[]>([]);
 
   const [page, setPage] = useState(() => {
     const p = searchParams.get("page");
@@ -77,6 +80,18 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
       setLoading(false);
     }
   }
+  async function getPopular() {
+    try {
+      const response = await axios.get("http://localhost:3030/post/popular", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
+      setPopular(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     fetchSomePost(page);
   }, [verified]);
@@ -92,6 +107,8 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
         setSearchParams,
         setPage,
         page,
+        getPopular,
+        popular,
       }}
     >
       {children}

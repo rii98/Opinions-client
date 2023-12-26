@@ -5,32 +5,38 @@ const Header = () => {
   const { verified, setVerified } = useAuth();
   console.log(verified);
   return (
-    <div className="navbar text-white shadow-md mb-6 sticky top-0 z-[1000] bg-teal-400 px-6">
+    <div className="navbar text-white shadow-md mb-6 sticky top-0 z-[1000] bg-teal-400 sm:px-6">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           Opinions
         </Link>
       </div>
-      <div className="flex-none">
-        <ul className="flex gap-8 items-center">
-          <li>
-            <Link to="/popular">Popular</Link>
-          </li>
-          <li>
-            {verified && (
-              <button
-                className="btn btn-error text-white"
-                onClick={() => {
-                  localStorage.removeItem("access-token");
-                  setVerified(false);
-                }}
-              >
-                Log out
-              </button>
-            )}
-          </li>
-        </ul>
-      </div>
+
+      <ul className="flex gap-4 items-center">
+        <li>
+          <Link to="/profile" className="sm:text-lg">
+            Profile
+          </Link>
+        </li>
+        <li>
+          <Link to="/popular" className="sm:text-lg">
+            Popular
+          </Link>
+        </li>
+        <li>
+          {verified && (
+            <button
+              className="btn btn-error text-white sm:text-lg"
+              onClick={() => {
+                localStorage.removeItem("access-token");
+                setVerified(false);
+              }}
+            >
+              Log out
+            </button>
+          )}
+        </li>
+      </ul>
     </div>
   );
 };

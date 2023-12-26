@@ -13,6 +13,7 @@ interface AuthContextProps {
   ) => Promise<void>;
   verified: boolean;
   setVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  authError: string;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -26,6 +27,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 }) => {
   const navigate = useNavigate();
   const [verified, setVerified] = useState(false);
+  const [authError, setAuthError] = useState("");
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(
@@ -39,19 +41,22 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         }
       );
       localStorage.setItem("access-token", response.data.token);
+      localStorage.setItem("id", response.data.id);
       setVerified(true);
+      setAuthError("");
       navigate("/");
     } catch (error) {
+      setAuthError("Incorrect username or password.");
       console.error(error);
     }
   };
 
   const signup = async (
+    firstname: string,
+    lastname: string,
     email: string,
     password: string,
-    confirmPassword: string,
-    firstname: string,
-    lastname: string
+    confirmPassword: string
   ) => {
     try {
       const response = await axios.post(
@@ -68,13 +73,20 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         }
       );
       localStorage.setItem("access-token", response.data.token);
+      localStorage.setItem("id", response.data.id);
+      setVerified(true);
+      navigate("/");
+      setAuthError("");
     } catch (error) {
+      setAuthError("Please check all fields and retry. Bad request.");
       console.error(error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ login, signup, verified, setVerified }}>
+    <AuthContext.Provider
+      value={{ login, signup, verified, setVerified, authError }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -8,16 +9,11 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { signup, authError } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      firstname,
-      lastname,
-      email,
-      password,
-      confirmPassword,
-    });
+    signup(firstname, lastname, email, password, confirmPassword);
   };
 
   return (
@@ -118,6 +114,7 @@ const Signup = () => {
             </Link>
           </p>
         </form>
+        <p className="text-center text-red-600 font-bold">{authError}</p>
       </div>
     </section>
   );
