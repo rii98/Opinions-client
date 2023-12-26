@@ -1,17 +1,16 @@
 import { useState } from "react";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { login } = useAuth();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      email,
-      password,
-    });
+
+    login(email, password);
   };
 
   return (
