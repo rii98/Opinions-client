@@ -38,17 +38,18 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   const [error, setError] = useState<string>("");
 
   async function fetchSomePost(page: number) {
+    const url =
+      (await import.meta.env.VITE_LOCAL) === "TRUE"
+        ? "http://localhost:3030/post/some"
+        : "https://opinions-server.vercel.app/post/some";
     try {
-      const response: AxiosResponse<Post[]> = await axios.get(
-        "https://opinions-server.vercel.app/post/some",
-        {
-          params: {
-            page: page,
-          },
-          withCredentials: true,
-          // signal: signal, // Pass the signal to the request
-        }
-      );
+      const response: AxiosResponse<Post[]> = await axios.get(url, {
+        params: {
+          page: page,
+        },
+        withCredentials: true,
+        // signal: signal, // Pass the signal to the request
+      });
 
       // if (!abortController.signal.aborted) {
       setPosts((prevPosts) => [...prevPosts, ...response.data]);
