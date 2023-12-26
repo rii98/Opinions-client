@@ -49,10 +49,10 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   });
 
   async function fetchSomePost(page: number) {
-    const url =
-      (await import.meta.env.VITE_LOCAL) === "TRUE"
-        ? "http://localhost:3030/post/some"
-        : "https://opinions-server.vercel.app/post/some";
+    const url = "https://opinions-server.vercel.app/post/some";
+    // (await import.meta.env.VITE_LOCAL) === "TRUE"
+    //   ? "http://localhost:3030/post/some"
+    //   : "https://opinions-server.vercel.app/post/some";
     try {
       const response: AxiosResponse<Post[]> = await axios.get(url, {
         params: {

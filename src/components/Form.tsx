@@ -8,10 +8,10 @@ const Form = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const url =
-        (await import.meta.env.VITE_LOCAL) === "TRUE"
-          ? "http://localhost:3030/post/create"
-          : "https://opinions-server.vercel.app/post/create";
+      const url = "https://opinions-server.vercel.app/post/create";
+      // (await import.meta.env.VITE_LOCAL) === "TRUE"
+      //   ? "http://localhost:3030/post/create"
+      //   : "https://opinions-server.vercel.app/post/create";
       const response = await axios.post(
         url,
         {
