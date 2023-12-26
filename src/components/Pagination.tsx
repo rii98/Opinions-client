@@ -3,7 +3,7 @@ import { usePosts } from "../context/PostContext";
 
 const Pagination = () => {
   const { fetchSomePost, page, setSearchParams, setPage } = usePosts();
-  const [fetched, setFetched] = useState(1);
+  const [fetched, setFetched] = useState([page]);
   return (
     <div className="join">
       <button
@@ -21,8 +21,8 @@ const Pagination = () => {
       <button
         className="join-item btn"
         onClick={() => {
-          if (fetched < page + 1) {
-            setFetched((p) => p + 1);
+          if (!fetched.includes(page + 1)) {
+            setFetched((prev) => [...prev, page + 1]);
             fetchSomePost(page + 1);
           }
           setSearchParams({ page: page + 1 });
