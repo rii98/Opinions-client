@@ -16,6 +16,9 @@ const Home = () => {
         <Header />
         <Form />
 
+        <h2 className="text-center text-3xl font-bold my-10 p-6 bg-green-300 text-white">
+          PAGE {page}
+        </h2>
         {loading ? (
           "loading..."
         ) : (
