@@ -5,7 +5,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
