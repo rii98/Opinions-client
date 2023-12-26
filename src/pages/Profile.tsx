@@ -13,11 +13,14 @@ const Profile = () => {
   useEffect(() => {
     async function user() {
       try {
-        const response = await axios.get("http://localhost:3030/user/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://opinions-server.vercel.app/user/" + id,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        );
         setUser(response.data);
       } catch (error) {
         console.log(error);

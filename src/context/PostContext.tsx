@@ -55,9 +55,9 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   });
 
   async function fetchSomePost(page: number) {
-    const url = "http://localhost:3030/post/some";
+    const url = "https://opinions-server.vercel.app/post/some";
     // (await import.meta.env.VITE_LOCAL) === "TRUE"
-    // ? "http://localhost:3030/post/some"
+    // ? "https://opinions-server.vercel.app/post/some"
     //   : "https://opinions-server.vercel.app/post/some";
     try {
       console.log(`Bearer ${localStorage.getItem("access-token")}`);
@@ -82,11 +82,14 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   }
   async function getPopular() {
     try {
-      const response = await axios.get("http://localhost:3030/post/popular", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://opinions-server.vercel.app/post/popular",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      );
       setPopular(response.data);
     } catch (error) {
       console.log(error);
