@@ -12,6 +12,7 @@ interface AuthContextProps {
     lastname: string
   ) => Promise<void>;
   verified: boolean;
+  setVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -73,7 +74,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ login, signup, verified }}>
+    <AuthContext.Provider value={{ login, signup, verified, setVerified }}>
       {children}
     </AuthContext.Provider>
   );

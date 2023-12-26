@@ -43,7 +43,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const { verified } = useAuth();
+  const { verified, setVerified } = useAuth();
 
   const [page, setPage] = useState(() => {
     const p = searchParams.get("page");
@@ -67,7 +67,8 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
       });
-      setPosts((prevPosts) => [...response.data, ...prevPosts]);
+      setPosts((prevPosts) => [...prevPosts, ...response.data]);
+      setVerified(true);
       setError("");
     } catch (error: any) {
       setError("Error fetching the posts.Unauthorized access.");

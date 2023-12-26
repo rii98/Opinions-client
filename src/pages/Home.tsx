@@ -3,12 +3,20 @@ import Card from "../components/Card";
 import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import { usePosts } from "../context/PostContext";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { posts, error, loading, page } = usePosts();
 
   if (error) {
-    return <h1>{error}</h1>;
+    return (
+      <div className="h-[100vh] flex flex-col gap-6 justify-center items-center">
+        <h1 className="text-red-500 text-lg">{error}</h1>
+        <Link to="/login" className="btn btn-accent">
+          Back to login
+        </Link>
+      </div>
+    );
   }
   return (
     <div>
