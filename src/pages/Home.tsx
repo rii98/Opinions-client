@@ -4,12 +4,20 @@ import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import { usePosts } from "../context/PostContext";
 import Error from "../components/Error";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const { posts, error, loading, page } = usePosts();
+  const { verified } = useAuth();
+  const navigate = useNavigate();
 
+  if (!verified) {
+    navigate("/login");
+  }
   if (error) {
     return <Error />;
   }
+
   return (
     <div>
       <div>
