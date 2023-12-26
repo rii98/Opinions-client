@@ -1,5 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Popular from "./pages/Popular";
+
 const App = () => {
-  return <div className=" btn btn-primary">This is the app component</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/popular" element={<Popular />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
