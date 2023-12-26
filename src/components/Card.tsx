@@ -5,7 +5,7 @@ const Card = ({ post }: { post: Post }) => {
   const [upVoted, setUpVoted] = useState(false);
   const [count, setCount] = useState(() => post.upvotes);
   return (
-    <div className="w-96 h-[200px] glass bg-purple-200 shadow-md rounded-md p-4 flex flex-col justify-between text-slate-700">
+    <div className="w-96 h-[200px] glass bg-purple-200 shadow-md rounded-md p-4 flex flex-col justify-between text-slate-700 mb-10 sm:mb-0">
       <p className="font-semibold">{post.text}</p>
       <div className="flex justify-between items-center">
         <div>{new Date(post.createdAt).toLocaleDateString()}</div>

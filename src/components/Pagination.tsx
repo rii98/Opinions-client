@@ -5,7 +5,7 @@ const Pagination = () => {
   const { fetchSomePost, page, setSearchParams, setPage } = usePosts();
   const [fetched, setFetched] = useState([page]);
   return (
-    <div className="join">
+    <div className="join my-6 md:my-10">
       <button
         className="join-item btn"
         onClick={() => {

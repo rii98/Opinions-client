@@ -29,20 +29,22 @@ const Form = () => {
     setOpinion("");
   };
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col max-w-xl m-auto gap-2 mx-auto my-5"
-    >
-      <textarea
-        className="textarea textarea-info w-full"
-        placeholder="Your Opinion..."
-        value={opinion}
-        onChange={(e) => setOpinion(e.target.value)}
-      ></textarea>
-      <button className="btn btn-accent text-white  ml-auto block ">
-        Post
-      </button>
-    </form>
+    <div className="p-6 sm:p-0">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col max-w-xl m-auto gap-2 mx-auto my-5"
+      >
+        <textarea
+          className="textarea textarea-info w-full"
+          placeholder="Your Opinion..."
+          value={opinion}
+          onChange={(e) => setOpinion(e.target.value)}
+        ></textarea>
+        <button className="btn btn-accent text-white  ml-auto block ">
+          Post
+        </button>
+      </form>
+    </div>
   );
 };
 export default Form;
