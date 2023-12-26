@@ -1,6 +1,13 @@
+import Error from "../components/Error";
 import Header from "../components/Header";
+import { useAuth } from "../context/AuthContext";
 
 const Popular = () => {
+  const { verified } = useAuth();
+
+  if (!verified) {
+    return <Error />;
+  }
   return (
     <div>
       <Header />
