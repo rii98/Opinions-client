@@ -6,7 +6,8 @@ import {
   ReactNode,
 } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 export interface Post {
   _id: string;
@@ -37,10 +38,12 @@ const PostContext = createContext<PostContextProps | undefined>(undefined);
 const PostContextProvider: React.FC<PostContextProviderProps> = ({
   children,
 }) => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const { verified } = useAuth();
 
   const [page, setPage] = useState(() => {
     const p = searchParams.get("page");
@@ -54,31 +57,28 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     // ? "http://localhost:3030/post/some"
     //   : "https://opinions-server.vercel.app/post/some";
     try {
+      console.log(`Bearer ${localStorage.getItem("access-token")}`);
       const response: AxiosResponse<Post[]> = await axios.get(url, {
         params: {
           page: page,
         },
         withCredentials: true,
-        // signal: signal, // Pass the signal to the request
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
       });
-
-      // if (!abortController.signal.aborted) {
       setPosts((prevPosts) => [...response.data, ...prevPosts]);
-      // }
+      setError("");
     } catch (error: any) {
-      if (error.name === "AbortError") {
-        console.log("Request was aborted");
-      } else {
-        console.error("Error while fetching some posts:", error);
-        setError("Error fetching the posts. Please try again later.");
-      }
+      setError("Error fetching the posts.Unauthorized access.");
+      navigate("/login");
     } finally {
       setLoading(false);
     }
   }
   useEffect(() => {
     fetchSomePost(page);
-  }, []);
+  }, [verified]);
 
   return (
     <PostContext.Provider

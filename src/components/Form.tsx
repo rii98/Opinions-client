@@ -19,6 +19,9 @@ const Form = () => {
         },
         {
           withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
         }
       );
       setPosts((prev) => [response.data, ...prev]);

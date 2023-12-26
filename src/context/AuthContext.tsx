@@ -11,6 +11,7 @@ interface AuthContextProps {
     firstname: string,
     lastname: string
   ) => Promise<void>;
+  verified: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -23,6 +24,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
   const navigate = useNavigate();
+  const [verified, setVerified] = useState(false);
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(
@@ -36,6 +38,8 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         }
       );
       localStorage.setItem("access-token", response.data.token);
+      setVerified(true);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +73,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ login, signup }}>
+    <AuthContext.Provider value={{ login, signup, verified }}>
       {children}
     </AuthContext.Provider>
   );
