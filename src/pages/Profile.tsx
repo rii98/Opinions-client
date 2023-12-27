@@ -37,7 +37,7 @@ const Profile = () => {
     return (
       <>
         <Header />
-        <div className="skeleton max-w-2xl h-[250px]"></div>
+        <div className="skeleton  max-w-2xl h-[200px] mt-6 mx-6 sm:mx-auto sm:h-[300px]"></div>
       </>
     );
   }
@@ -46,7 +46,7 @@ const Profile = () => {
       <Header />
 
       {user ? (
-        <div className="card card-side bg-base-100 shadow-xl max-w-2xl m-auto">
+        <div className="card card-side bg-base-100 shadow-xl max-w-2xl mt-6 mx-6 sm:mx-auto">
           <figure>
             <img
               src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
