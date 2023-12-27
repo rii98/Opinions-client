@@ -8,7 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup, authError } = useAuth();
+  const { signup, authError, authLoading } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,11 +100,15 @@ const Signup = () => {
 
           <div className="flex justify-center pb-4">
             <button
+              disabled={authLoading}
               type="submit"
               className="px-4 py-2 text-blue-800 font-semibold bg-blue-200 rounded-md"
             >
               Create Account
             </button>
+            {authLoading && (
+              <span className="pl-4 loading loading-bars loading-md"></span>
+            )}
           </div>
           <p className="text-center">
             Already have an account?{" "}

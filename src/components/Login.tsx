@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, authError } = useAuth();
+  const { login, authError, authLoading } = useAuth();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(email, password);
@@ -51,10 +51,14 @@ const Login = () => {
           <div className="flex justify-center pb-4">
             <button
               type="submit"
-              className="px-4 py-2 text-blue-800 font-semibold bg-blue-200 rounded-md"
+              disabled={authLoading}
+              className="px-4 py-2 text-blue-800 font-semibold bg-blue-200 rounded-md "
             >
-              Login
+              Login{" "}
             </button>
+            {authLoading && (
+              <span className="pl-4 loading loading-bars loading-md"></span>
+            )}
           </div>
           <p className="text-center">
             Don't have account{" "}

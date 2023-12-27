@@ -10,7 +10,9 @@ interface User {
 const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = useState<User | null>(null);
+  const [loadingProfile, setLoadingProfile] = useState(false);
   useEffect(() => {
+    setLoadingProfile(true);
     async function user() {
       try {
         const response = await axios.get(
@@ -24,13 +26,25 @@ const Profile = () => {
         setUser(response.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoadingProfile(false);
       }
     }
     user();
   }, [id]);
+
+  if (loadingProfile) {
+    return (
+      <>
+        <Header />
+        <div className="skeleton max-w-2xl h-[250px]"></div>
+      </>
+    );
+  }
   return (
     <div>
       <Header />
+
       {user ? (
         <div className="card card-side bg-base-100 shadow-xl max-w-2xl m-auto">
           <figure>

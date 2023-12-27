@@ -5,7 +5,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import axios,{AxiosResponse} from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
@@ -29,6 +29,7 @@ interface PostContextProps {
   setSearchParams: any; //i have to find its type
   getPopular: () => Promise<void>;
   popular: Post[];
+  postLoading: boolean;
 }
 
 interface PostContextProviderProps {
@@ -47,6 +48,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const { verified, setVerified } = useAuth();
   const [popular, setPopular] = useState<Post[]>([]);
+  const [postLoading, setPostLoading] = useState(false);
 
   const [page, setPage] = useState(() => {
     const p = searchParams.get("page");
@@ -55,10 +57,8 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   });
 
   async function fetchSomePost(page: number) {
+    setPostLoading(true);
     const url = "https://opinions-server.vercel.app/post/some";
-    // (await import.meta.env.VITE_LOCAL) === "TRUE"
-    // ? "https://opinions-server.vercel.app/post/some"
-    //   : "https://opinions-server.vercel.app/post/some";
     try {
       console.log(`Bearer ${localStorage.getItem("access-token")}`);
       const response: AxiosResponse<Post[]> = await axios.get(url, {
@@ -78,9 +78,11 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
       navigate("/login");
     } finally {
       setLoading(false);
+      setPostLoading(false);
     }
   }
   async function getPopular() {
+    setPostLoading(true);
     try {
       const response = await axios.get(
         "https://opinions-server.vercel.app/post/popular",
@@ -93,6 +95,8 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
       setPopular(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setPostLoading(false);
     }
   }
   useEffect(() => {
@@ -112,6 +116,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
         page,
         getPopular,
         popular,
+        postLoading,
       }}
     >
       {children}

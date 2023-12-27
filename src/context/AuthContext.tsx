@@ -14,6 +14,7 @@ interface AuthContextProps {
   verified: boolean;
   setVerified: React.Dispatch<React.SetStateAction<boolean>>;
   authError: string;
+  authLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -28,7 +29,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const navigate = useNavigate();
   const [verified, setVerified] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
   const login = async (email: string, password: string) => {
+    setAuthLoading(true);
     try {
       const response = await axios.post(
         "https://opinions-server.vercel.app/auth/login",
@@ -48,6 +51,8 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     } catch (error) {
       setAuthError("Incorrect username or password.");
       console.error(error);
+    } finally {
+      setAuthLoading(false);
     }
   };
 
@@ -58,6 +63,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     password: string,
     confirmPassword: string
   ) => {
+    setAuthLoading(true);
     try {
       const response = await axios.post(
         "https://opinions-server.vercel.app/auth/signup",
@@ -80,12 +86,14 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     } catch (error) {
       setAuthError("Please check all fields and retry. Bad request.");
       console.error(error);
+    } finally {
+      setAuthLoading(false);
     }
   };
 
   return (
     <AuthContext.Provider
-      value={{ login, signup, verified, setVerified, authError }}
+      value={{ login, signup, verified, setVerified, authError, authLoading }}
     >
       {children}
     </AuthContext.Provider>

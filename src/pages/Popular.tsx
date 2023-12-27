@@ -7,11 +7,24 @@ import Card from "../components/Card";
 
 const Popular = () => {
   const { verified } = useAuth();
-  const { getPopular, popular } = usePosts();
+  const { getPopular, popular, postLoading } = usePosts();
   useEffect(() => {
     getPopular();
   }, []);
 
+  if (postLoading) {
+    return (
+      <>
+        <Header />
+        <div className="skeleton w-[100%] h-[50px]"></div>
+        <div className="flex gap-4 flex-wrap p-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
+            <div key={k} className="skeleton w-96 h-[200px]"></div>
+          ))}
+        </div>
+      </>
+    );
+  }
   if (!verified) {
     return <Error />;
   }
