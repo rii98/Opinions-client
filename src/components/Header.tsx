@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { usePosts } from "../context/PostContext";
 
 const Header = () => {
   const { verified, setVerified } = useAuth();
-  console.log(verified);
+  const { setPosts } = usePosts();
   return (
     <div className="navbar text-white shadow-md mb-6 sticky top-0 z-[1000] bg-teal-400 sm:px-6">
       <div className="flex-1">
@@ -35,6 +36,7 @@ const Header = () => {
               onClick={() => {
                 localStorage.removeItem("access-token");
                 setVerified(false);
+                setPosts([]);
               }}
             >
               Log out

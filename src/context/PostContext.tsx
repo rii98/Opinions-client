@@ -66,7 +66,6 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     setPostLoading(true);
     const url = "https://opinions-server.vercel.app/post/some";
     try {
-      console.log(`Bearer ${localStorage.getItem("access-token")}`);
       const response: AxiosResponse<Post[]> = await axios.get(url, {
         params: {
           page: page,
@@ -106,7 +105,25 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     }
   }
   useEffect(() => {
-    fetchSomePost(page);
+    if (verified) {
+      fetchSomePost(page);
+    } else {
+      async function validate() {
+        const response = await axios.get(
+          "http://localhost:3030/auth/validate",
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        );
+        const hasBeenVerified = response.data.verified;
+        if (hasBeenVerified) setVerified(hasBeenVerified);
+        else navigate("/login");
+      }
+      validate();
+    }
   }, [verified]);
 
   return (
