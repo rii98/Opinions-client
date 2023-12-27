@@ -110,7 +110,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     } else {
       async function validate() {
         const response = await axios.get(
-          "http://localhost:3030/auth/validate",
+          "https://opinions-server.vercel.app/auth/validate",
           {
             withCredentials: true,
             headers: {
