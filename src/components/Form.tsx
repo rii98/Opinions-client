@@ -5,8 +5,10 @@ import { usePosts } from "../context/PostContext";
 const Form = () => {
   const [opinion, setOpinion] = useState("");
   const { setPosts } = usePosts();
+  const [uploadingPost, setUploadingPost] = useState(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUploadingPost(true);
     try {
       const url = "https://opinions-server.vercel.app/post/create";
       // (await import.meta.env.VITE_LOCAL) === "TRUE"
@@ -27,6 +29,8 @@ const Form = () => {
       setPosts((prev) => [response.data, ...prev]);
     } catch (error) {
       console.log("Error while creating a new post.", error);
+    } finally {
+      setUploadingPost(false);
     }
 
     setOpinion("");
@@ -44,7 +48,10 @@ const Form = () => {
           onChange={(e) => setOpinion(e.target.value)}
         ></textarea>
         <button className="btn btn-accent text-white  ml-auto block ">
-          Post
+          Post{" "}
+          {uploadingPost && (
+            <span className="pl-4 loading loading-bars loading-md"></span>
+          )}
         </button>
       </form>
     </div>
