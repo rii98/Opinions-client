@@ -13,7 +13,7 @@ const Login = () => {
   };
 
   return (
-    <section className="mt-8 p-4 bg-lime-300 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
+    <section className="mt-8 p-4 bg-blue-100 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
       <h1 className="font-bold text-xl text-center">Login</h1>
       <div className="pt-4">
         <form onSubmit={handleSubmit}>

@@ -18,9 +18,9 @@ const Home = () => {
         </div>
 
         <div className="skeleton w-[100%] h-[50px]"></div>
-        <div className="flex gap-4 flex-wrap p-6 m-auto justify-center">
+        <div className="flex flex-col gap-4 p-6 m-auto justify-center items-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
-            <div key={k} className="skeleton w-96 h-[200px]"></div>
+            <div key={k} className="skeleton w-[400px] h-[200px]"></div>
           ))}
         </div>
       </>
@@ -42,7 +42,7 @@ const Home = () => {
         {loading ? (
           "loading..."
         ) : (
-          <main className="p-4 flex flex-wrap justify-center items-center gap-8">
+          <main className="p-4 flex flex-col justify-center items-center gap-8">
             {posts.map((post, index) => {
               if (10 * (page - 1) <= index && index < 10 * page)
                 // 10 here signigies 10 posts are fetched once
