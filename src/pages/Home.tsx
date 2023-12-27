@@ -6,15 +6,18 @@ import { usePosts } from "../context/PostContext";
 import Error from "../components/Error";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
   const { posts, error, page, postLoading } = usePosts();
   const { verified } = useAuth();
 
-  if (!verified) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!verified) {
+      navigate("/login");
+    }
+  }, [verified]);
   if (postLoading) {
     return (
       <>
