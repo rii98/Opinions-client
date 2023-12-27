@@ -10,10 +10,10 @@ const Form = () => {
     e.preventDefault();
     setUploadingPost(true);
     try {
-      const url = "http://localhost:3030/post/create";
+      const url = "https://opinions-server.vercel.app/post/create";
       // (await import.meta.env.VITE_LOCAL) === "TRUE"
-      //   ? "http://localhost:3030/post/create"
-      //   : "http://localhost:3030/post/create";
+      //   ? "https://opinions-server.vercel.app/post/create"
+      //   : "https://opinions-server.vercel.app/post/create";
       const response = await axios.post(
         url,
         {

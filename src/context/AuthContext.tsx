@@ -34,7 +34,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     setAuthLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3030/auth/login",
+        "https://opinions-server.vercel.app/auth/login",
         {
           email,
           password,
@@ -66,7 +66,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     setAuthLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3030/auth/signup",
+        "https://opinions-server.vercel.app/auth/signup",
         {
           email,
           password,
