@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSolidUpvote, BiUpvote } from "react-icons/bi";
 import { Post } from "../context/PostContext";
 import { Link } from "react-router-dom";
+import axios from "axios";
 function timeAgo(date: Date): string {
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -25,8 +26,33 @@ function timeAgo(date: Date): string {
 // Example usage:
 
 const Card = ({ post }: { post: Post }) => {
+  const upvoteBody = {
+    post: post._id,
+    user: localStorage.getItem("id"),
+  };
+  const toggleLike = async (add: "true" | "false") => {
+    await axios.post("https://opinions-server.vercel.app/post/addupvote", {
+      ...upvoteBody,
+      add,
+    });
+  };
   const [upVoted, setUpVoted] = useState(false);
-  const [count, setCount] = useState(() => post.upvotes);
+  useEffect(() => {
+    const fetchLikeStatus = async () => {
+      try {
+        const response = await axios.post(
+          "https://opinions-server.vercel.app/post/isliked",
+          upvoteBody
+        );
+        console.log(response.data.alreadyLiked);
+        setUpVoted(response.data.alreadyLiked);
+      } catch (error) {
+        console.error("Error fetching like status:", error);
+      }
+    };
+    fetchLikeStatus();
+  }, []);
+  const [count, setCount] = useState(() => post.upvotes.length);
   return (
     <div className="w-full  md:w-[500px] lg:w-[600px] h-auto  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4">
       <div className="flex gap-4 flex-start">
@@ -55,12 +81,14 @@ const Card = ({ post }: { post: Post }) => {
           <div
             className=" cursor-pointer"
             onClick={() => {
+              setUpVoted((prev) => !prev);
               if (!upVoted) {
-                setCount((prev) => prev + 1);
+                setCount((prev: number) => prev + 1);
+                toggleLike("true");
               } else {
-                setCount((prev) => prev - 1);
+                setCount((prev: number) => prev - 1);
+                toggleLike("false");
               }
-              setUpVoted((p) => !p);
             }}
           >
             {upVoted ? (

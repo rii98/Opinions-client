@@ -12,7 +12,7 @@ import { useAuth } from "./AuthContext";
 export interface Post {
   _id: string;
   text: string;
-  upvotes: number;
+  upvotes: any; // i have to fix this
   createdAt: string;
   updatedAt: string;
   user: {
@@ -75,6 +75,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
       });
+      console.log("Fetched Posts: ", response.data);
       setPosts((prevPosts) => [...prevPosts, ...response.data]);
       setVerified(true);
       setError("");
