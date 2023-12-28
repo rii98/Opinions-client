@@ -27,7 +27,6 @@ const Home = () => {
           <div className="skeleton w-16 h-10 ml-auto mb-6"></div>
         </div>
 
-        <div className="skeleton w-[100%] h-[50px]"></div>
         <div className="flex flex-col gap-4 p-6 m-auto justify-center items-center">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
             <div key={k} className="skeleton w-[400px] h-[200px]"></div>
@@ -45,10 +44,6 @@ const Home = () => {
       <div>
         <Header />
         <Form />
-
-        <h2 className="text-center text-3xl font-bold my-10 p-6 bg-green-300 text-white">
-          PAGE {page}
-        </h2>
 
         <main className="p-4 flex flex-col justify-center items-center gap-8">
           {posts.map((post, index) => {
