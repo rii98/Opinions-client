@@ -23,8 +23,6 @@ function timeAgo(date: Date): string {
   }
 }
 
-// Example usage:
-
 const Card = ({ post }: { post: Post }) => {
   const upvoteBody = {
     post: post._id,
@@ -37,6 +35,7 @@ const Card = ({ post }: { post: Post }) => {
     });
   };
   const [upVoted, setUpVoted] = useState(false);
+  const [count, setCount] = useState(post.upvotesCount);
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
@@ -52,7 +51,7 @@ const Card = ({ post }: { post: Post }) => {
     };
     fetchLikeStatus();
   }, []);
-  const [count, setCount] = useState(() => post.upvotes.length);
+
   return (
     <div className="w-full  md:w-[500px] lg:w-[600px] h-auto  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4">
       <div className="flex gap-4 flex-start">

@@ -21,6 +21,7 @@ export interface Post {
     email: string;
     _id: string;
   };
+  upvotesCount: number;
   // Add other fields as needed
 }
 
