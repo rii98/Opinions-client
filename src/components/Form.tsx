@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { usePosts } from "../context/PostContext";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const navigate = useNavigate();
   const [opinion, setOpinion] = useState("");
   const { setPosts } = usePosts();
   const [uploadingPost, setUploadingPost] = useState(false);
@@ -10,10 +12,7 @@ const Form = () => {
     e.preventDefault();
     setUploadingPost(true);
     try {
-      const url = "https://opinions-server.vercel.app/post/create";
-      // (await import.meta.env.VITE_LOCAL) === "TRUE"
-      //   ? "https://opinions-server.vercel.app/post/create"
-      //   : "https://opinions-server.vercel.app/post/create";
+      const url = "http://localhost:3030/post/create";
       const response = await axios.post(
         url,
         {
@@ -28,6 +27,7 @@ const Form = () => {
         }
       );
       setPosts((prev) => [response.data, ...prev]);
+      navigate("/");
     } catch (error) {
       console.log("Error while creating a new post.", error);
     } finally {
@@ -51,7 +51,13 @@ const Form = () => {
         <button className="btn btn-accent text-white  ml-auto block ">
           Post{" "}
           {uploadingPost && (
-            <span className="pl-4 loading loading-bars loading-md"></span>
+            <div>
+              <span className="pl-4 loading loading-bars loading-md"></span>
+
+              <form method="dialog" className="hidden">
+                <button className="btn">Close</button>
+              </form>
+            </div>
           )}
         </button>
       </form>

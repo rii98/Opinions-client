@@ -1,4 +1,3 @@
-import Form from "../components/Form";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Pagination from "../components/Pagination";
@@ -14,6 +13,7 @@ const Home = () => {
   const { verified } = useAuth();
 
   useEffect(() => {
+    if (postLoading) return;
     if (!verified) {
       navigate("/login");
     }
@@ -43,8 +43,6 @@ const Home = () => {
     <div>
       <div>
         <Header />
-        <Form />
-
         <main className="p-4 flex flex-col justify-center items-center gap-8">
           {posts.map((post, index) => {
             if (10 * (page - 1) <= index && index < 10 * page)

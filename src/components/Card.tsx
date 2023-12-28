@@ -31,7 +31,7 @@ const Card = ({ post }: { post: Post }) => {
     user: localStorage.getItem("id"),
   };
   const toggleLike = async (add: "true" | "false") => {
-    await axios.post("https://opinions-server.vercel.app/post/addupvote", {
+    await axios.post("http://localhost:3030/post/addupvote", {
       ...upvoteBody,
       add,
     });
@@ -41,7 +41,7 @@ const Card = ({ post }: { post: Post }) => {
     const fetchLikeStatus = async () => {
       try {
         const response = await axios.post(
-          "https://opinions-server.vercel.app/post/isliked",
+          "http://localhost:3030/post/isliked",
           upvoteBody
         );
         console.log(response.data.alreadyLiked);
