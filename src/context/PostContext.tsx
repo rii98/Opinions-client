@@ -65,7 +65,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
 
   async function fetchSomePost(page: number) {
     setPostLoading(true);
-    const url = "http://localhost:3030/post/some";
+    const url = "https://opinions-server.vercel.app/post/some";
     try {
       const response: AxiosResponse<Post[]> = await axios.get(url, {
         params: {
@@ -91,11 +91,14 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   async function getPopular() {
     setPostLoading(true);
     try {
-      const response = await axios.get("http://localhost:3030/post/popular", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://opinions-server.vercel.app/post/popular",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      );
       console.log(response.data);
       setPopular([...response.data]);
     } catch (error) {
@@ -110,7 +113,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     } else {
       async function validate() {
         const response = await axios.get(
-          "http://localhost:3030/auth/validate",
+          "https://opinions-server.vercel.app/auth/validate",
           {
             withCredentials: true,
             headers: {
