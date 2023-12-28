@@ -43,7 +43,7 @@ const Card = ({ post }: { post: Post }) => {
           "https://opinions-server.vercel.app/post/isliked",
           upvoteBody
         );
-        console.log(response.data.alreadyLiked);
+
         setUpVoted(response.data.alreadyLiked);
       } catch (error) {
         console.error("Error fetching like status:", error);

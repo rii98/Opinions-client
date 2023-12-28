@@ -18,6 +18,7 @@ const Home = () => {
       navigate("/login");
     }
   }, [verified]);
+
   if (postLoading) {
     return (
       <>

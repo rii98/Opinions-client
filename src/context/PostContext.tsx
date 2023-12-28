@@ -76,7 +76,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
       });
-      console.log("Fetched Posts: ", response.data);
+
       setPosts((prevPosts) => [...prevPosts, ...response.data]);
       setVerified(true);
       setError("");
@@ -99,7 +99,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
           },
         }
       );
-      console.log(response.data);
+
       setPopular([...response.data]);
     } catch (error) {
       console.log(error);
@@ -112,18 +112,21 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
       fetchSomePost(page);
     } else {
       async function validate() {
-        const response = await axios.get(
-          "https://opinions-server.vercel.app/auth/validate",
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
-          }
-        );
-        const hasBeenVerified = response.data.verified;
-        if (hasBeenVerified) setVerified(hasBeenVerified);
-        else navigate("/login");
+        try {
+          const response = await axios.get(
+            "https://opinions-server.vercel.app/auth/validate",
+            {
+              withCredentials: true,
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+              },
+            }
+          );
+          const hasBeenVerified = response.data.verified;
+          setVerified(hasBeenVerified);
+        } catch (error) {
+          navigate("/login");
+        }
       }
       validate();
     }
