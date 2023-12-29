@@ -5,6 +5,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import Profile from "./pages/Profile";
 import CreateNew from "./pages/CreateNew";
+import Search from "./components/Search";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/post/create" element={<CreateNew />} />
+      <Route path="/search" element={<Search />} />
     </Routes>
   );
 };
