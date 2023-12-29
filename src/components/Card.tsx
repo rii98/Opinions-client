@@ -30,7 +30,7 @@ const Card = ({ post }: { post: Post }) => {
   };
   const toggleLike = async (add: "true" | "false") => {
     await axios.post(
-      "http://localhost:3030/post/addupvote",
+      "https://opinions-server.vercel.app/post/addupvote",
       {
         ...upvoteBody,
         add,
@@ -48,7 +48,7 @@ const Card = ({ post }: { post: Post }) => {
     const fetchLikeStatus = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3030/post/isliked",
+          "https://opinions-server.vercel.app/post/isliked",
           upvoteBody,
           {
             headers: {
@@ -56,7 +56,6 @@ const Card = ({ post }: { post: Post }) => {
             },
           }
         );
-
         setUpVoted(response.data.alreadyLiked);
       } catch (error) {
         console.error("Error fetching like status:", error);
@@ -66,7 +65,7 @@ const Card = ({ post }: { post: Post }) => {
   }, []);
 
   return (
-    <div className="w-full  md:w-[500px] lg:w-[600px] h-auto  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4">
+    <div className="w-full flex flex-col justify-between lg:max-w-[500px] h-[200px]  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4 overflow-scroll">
       <div className="flex gap-4 flex-start">
         <Link to={`profile/${post.user._id}`}>
           <div className="avatar">
@@ -78,13 +77,13 @@ const Card = ({ post }: { post: Post }) => {
         <div className="overflow-scroll h-full text-white">
           <Link to={`/profile/${post.user._id}`}>
             <div className="text-sm font-bold pb-2 ">
-              @{post.user.firstname?.toLowerCase()}
+              @{post.user.firstname.toLowerCase()}
             </div>
           </Link>
           <p className="text-md overflow-scroll">{post.text}</p>
         </div>
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-2">
         <div className="font-semibold text-white">
           {timeAgo(new Date(post.createdAt))}
         </div>
