@@ -12,7 +12,7 @@ const Form = () => {
     e.preventDefault();
     setUploadingPost(true);
     try {
-      const url = "https://opinions-server.vercel.app/post/create";
+      const url = "http://localhost:3030/post/create";
       const response = await axios.post(
         url,
         {

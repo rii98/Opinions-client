@@ -29,10 +29,18 @@ const Card = ({ post }: { post: Post }) => {
     user: localStorage.getItem("id"),
   };
   const toggleLike = async (add: "true" | "false") => {
-    await axios.post("https://opinions-server.vercel.app/post/addupvote", {
-      ...upvoteBody,
-      add,
-    });
+    await axios.post(
+      "http://localhost:3030/post/addupvote",
+      {
+        ...upvoteBody,
+        add,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      }
+    );
   };
   const [upVoted, setUpVoted] = useState(false);
   const [count, setCount] = useState(post.upvotesCount);
@@ -40,8 +48,13 @@ const Card = ({ post }: { post: Post }) => {
     const fetchLikeStatus = async () => {
       try {
         const response = await axios.post(
-          "https://opinions-server.vercel.app/post/isliked",
-          upvoteBody
+          "http://localhost:3030/post/isliked",
+          upvoteBody,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
         );
 
         setUpVoted(response.data.alreadyLiked);
