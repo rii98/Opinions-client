@@ -53,10 +53,6 @@ const Form = () => {
           {uploadingPost && (
             <div>
               <span className="pl-4 loading loading-bars loading-md"></span>
-
-              <form method="dialog" className="hidden">
-                <button className="btn">Close</button>
-              </form>
             </div>
           )}
         </button>
