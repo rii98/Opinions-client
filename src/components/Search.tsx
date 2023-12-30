@@ -18,6 +18,9 @@ const Search = () => {
               firstname: search.split(" ")[0],
               lastname: search.split(" ")[1],
             },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
             signal,
           }
         );

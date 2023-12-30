@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { BiSolidUpvote, BiUpvote } from "react-icons/bi";
 import { Post } from "../context/PostContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
+interface CardProps {
+  post: Post;
+  home: boolean;
+}
+
 function timeAgo(date: Date): string {
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -23,11 +29,12 @@ function timeAgo(date: Date): string {
   }
 }
 
-const Card = ({ post }: { post: Post }) => {
+const Card: React.FC<CardProps> = ({ post, home }) => {
   const upvoteBody = {
     post: post._id,
     user: localStorage.getItem("id"),
   };
+
   const toggleLike = async (add: "true" | "false") => {
     await axios.post(
       "https://opinions-server.vercel.app/post/addupvote",
@@ -42,8 +49,62 @@ const Card = ({ post }: { post: Post }) => {
       }
     );
   };
+
   const [upVoted, setUpVoted] = useState(false);
   const [count, setCount] = useState(post.upvotesCount);
+
+  // Create a ref for the Card component
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (home) {
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.5, // Adjust as needed
+      };
+      const callback: IntersectionObserverCallback = (entries) => {
+        entries.forEach(async (entry) => {
+          if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            try {
+              const response = await axios.post(
+                "https://opinions-server.vercel.app/post/addseen",
+                {
+                  userId: localStorage.getItem("id"),
+                  postId: post._id,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                      "access-token"
+                    )}`,
+                  },
+                }
+              );
+              console.log(response.data);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          console.log(post._id);
+        });
+      };
+      // Observe the Card component
+      const observer = new IntersectionObserver(callback, options);
+      if (cardRef.current) {
+        observer.observe(cardRef.current);
+      }
+
+      // Cleanup observer on component unmount
+      return () => {
+        if (cardRef.current) {
+          observer.unobserve(cardRef.current);
+        }
+      };
+    }
+  }, [post._id]);
+
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
@@ -65,12 +126,18 @@ const Card = ({ post }: { post: Post }) => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col justify-between lg:max-w-[500px] h-[200px]  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4 overflow-scroll">
+    <div
+      ref={cardRef}
+      className="w-full flex flex-col justify-between lg:max-w-[500px] h-[200px]  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4 overflow-scroll"
+    >
       <div className="flex gap-4 flex-start">
         <Link to={`profile/${post.user._id}`}>
           <div className="avatar">
             <div className="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <img
+                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                alt="avatar"
+              />
             </div>
           </div>
         </Link>

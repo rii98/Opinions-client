@@ -182,7 +182,7 @@ const Profile = () => {
             (
               post: any //typescript adjustment left
             ) => (
-              <Card post={post} key={post._id} />
+              <Card post={post} key={post._id} home={false} />
             )
           )}
         </div>

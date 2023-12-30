@@ -63,19 +63,22 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
     else return 1;
   });
 
-  async function fetchSomePost(page: number) {
+  async function fetchSomePost() {
     setPostLoading(true);
-    const url = "https://opinions-server.vercel.app/post/some";
+    const url = "https://opinions-server.vercel.app/post/feed";
     try {
-      const response: AxiosResponse<Post[]> = await axios.get(url, {
-        params: {
-          page: page,
+      const response: AxiosResponse<Post[]> = await axios.post(
+        url,
+        {
+          id: localStorage.getItem("id"),
         },
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      );
 
       setPosts((prevPosts) => [...prevPosts, ...response.data]);
       setVerified(true);
@@ -109,7 +112,7 @@ const PostContextProvider: React.FC<PostContextProviderProps> = ({
   }
   useEffect(() => {
     if (verified) {
-      fetchSomePost(page);
+      fetchSomePost();
     } else {
       async function validate() {
         try {
