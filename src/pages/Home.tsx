@@ -59,7 +59,7 @@ const Home = () => {
               </p>
               <div className="flex justify-center mt-5 flex-col gap-5">
                 <Link to="/search" className="btn btn-error text-white">
-                  Search More
+                  Follow other users
                 </Link>
                 <Link to="/popular" className="btn btn-error text-white">
                   Popular

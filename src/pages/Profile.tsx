@@ -133,19 +133,25 @@ const Profile = () => {
                 @{user.firstname.toLowerCase()}
               </h2>
               <div>
-                <button
-                  onClick={() => {
-                    if (isfollowing) {
-                      setNumberFollowers((p) => p - 1);
-                    } else {
-                      setNumberFollowers((p) => p + 1);
-                    }
-                    handleFollow();
-                  }}
-                  className="btn btn-primary"
-                >
-                  {isfollowing ? "following" : "follow"}
-                </button>
+                {localStorage.getItem("id") !== id ? (
+                  <button
+                    onClick={() => {
+                      if (isfollowing) {
+                        setNumberFollowers((p) => p - 1);
+                      } else {
+                        setNumberFollowers((p) => p + 1);
+                      }
+                      handleFollow();
+                    }}
+                    className="btn btn-primary"
+                  >
+                    {isfollowing ? "following" : "follow"}
+                  </button>
+                ) : (
+                  <span className="p-1 rounded-lg  bg-teal-400 font-semibold text-xs text-white">
+                    self
+                  </span>
+                )}
               </div>
             </header>
             <div className="px-4">
