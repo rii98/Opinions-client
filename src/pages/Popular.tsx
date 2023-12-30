@@ -36,7 +36,7 @@ const Popular = () => {
       </h1>
       <main className="p-4 flex flex-col justify-center items-center gap-8">
         {popular.map((post) => {
-          return <Card post={post} key={post._id} />;
+          return <Card post={post} key={post._id} home={false} />;
         })}
       </main>
     </div>
