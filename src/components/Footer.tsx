@@ -19,7 +19,7 @@ const Footer = () => {
         </footer>
       </div>
       {verified && (
-        <footer className="absolute bottom-0 gap-4 bg-blue-800 rounded-lg text-white p-4 flex left-0 right-0 justify-between md:hidden mb-0">
+        <footer className="fixed bottom-0 gap-4 bg-blue-800 rounded-lg text-white p-4 flex left-0 right-0 justify-between md:hidden mb-0">
           <Link
             to={`/profile/${localStorage.getItem("id")}`}
             className="md:text-lg"

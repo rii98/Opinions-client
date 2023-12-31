@@ -25,7 +25,7 @@ const Login = () => {
             </label>
             <input
               required={true}
-              className="p-2 outline-none  rounded-md"
+              className="p-2 outline-none  rounded-md text-black"
               type="email"
               id="email"
               name="email"
@@ -41,7 +41,7 @@ const Login = () => {
             </label>
             <input
               required={true}
-              className="p-2 outline-none  rounded-md"
+              className="p-2 outline-none  rounded-md text-black"
               type="password"
               id="password"
               placeholder="Password"
