@@ -62,7 +62,7 @@ const Search = () => {
             {loading
               ? [1, 2, 3, 4, 5, 6, 7, 8, 10].map((f) => (
                   <div
-                    className="skeleton max-w-[500px] h-14 mb-4"
+                    className="skeleton bg-indigo-950 glass opacity-80 max-w-[500px] h-16 mb-4 rounded-[0]"
                     key={f}
                   ></div>
                 ))

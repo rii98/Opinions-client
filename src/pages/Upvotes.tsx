@@ -40,9 +40,14 @@ const Upvotes = () => {
         <Header />
         <main className="p-4 sm:p-0">
           <div className=" max-w-[500px] border rounded-md p-4 m-auto mb-4">
-            <h1 className="text-center font-semibold pb-4 border-b">Upvotes</h1>
+            <h1 className="text-center text-white font-semibold pb-4 border-b mb-4">
+              Upvotes
+            </h1>
             {[1, 2, 3, 4, 5, 6, 7, 8, 10].map((f) => (
-              <div className="skeleton w-full h-14 mb-4" key={f}></div>
+              <div
+                className="skeleton bg-indigo-950 glass opacity-80 w-full h-16 mb-4 rounded-none"
+                key={f}
+              ></div>
             ))}
           </div>
         </main>
@@ -54,7 +59,9 @@ const Upvotes = () => {
       <Header />
       <main className="p-4 sm:p-0">
         <div className=" max-w-[500px] border rounded-md p-4 m-auto">
-          <h1 className="text-center font-semibold pb-4 border-b">Upvotes</h1>
+          <h1 className="text-center font-semibold pb-4 border-b text-white mb-4">
+            Upvotes
+          </h1>
           {users.length === 0 ? (
             <p className="text-center text-red-500 font-2xl mt-4 font-bold">
               No upvotes

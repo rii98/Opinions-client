@@ -16,10 +16,15 @@ const Popular = () => {
     return (
       <>
         <Header />
-        <div className="skeleton w-[100%] h-[50px]"></div>
-        <div className="flex flex-col gap-4 p-6 m-auto justify-center items-center">
+        <h1 className="text-3xl font-bold text-center text-white p-4 m-auto">
+          Popular
+        </h1>
+        <div className="flex flex-col gap-4 p-6 justify-center items-center m-auto">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
-            <div key={k} className="skeleton w-[400px] h-[200px]"></div>
+            <div
+              key={k}
+              className="skeleton bg-indigo-950 glass opacity-80 w-full mx-4 sm:max-w-[500px] h-[200px]"
+            ></div>
           ))}
         </div>
       </>
@@ -31,7 +36,7 @@ const Popular = () => {
   return (
     <div>
       <Header />
-      <h1 className="text-3xl font-bold text-center text-slate-700 p-4 m-auto">
+      <h1 className="text-3xl font-bold text-center text-white p-4 m-auto">
         Popular
       </h1>
       <main className="p-4 flex flex-col justify-center items-center gap-8">

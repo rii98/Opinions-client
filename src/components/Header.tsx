@@ -11,7 +11,7 @@ const Header = () => {
   const { setPosts } = usePosts();
   const navigate = useNavigate();
   return (
-    <div className="flex p-4 md:p-2 items-center text-white shadow-md mb-6 sticky top-0 z-[1000] bg-teal-400 md:px-6 ">
+    <div className="flex p-4 md:p-2 items-center bg-blue-900 text-white shadow-md mb-6 sticky top-0 z-[1000]  md:px-6 ">
       <div className="flex-1 text-lg font-bold md:text-2xl">
         <Link to="/">Opinions</Link>
       </div>

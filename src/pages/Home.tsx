@@ -29,7 +29,7 @@ const Home = () => {
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
             <div
               key={k}
-              className="skeleton w-full mx-4 sm:max-w-[500px] h-[200px]"
+              className="skeleton bg-indigo-950 glass opacity-80 w-full mx-4 sm:max-w-[500px] h-[200px]"
             ></div>
           ))}
         </div>
@@ -53,7 +53,7 @@ const Home = () => {
 
           {posts.length === 0 && (
             <div>
-              <p className="font-bold text-3xl flex">
+              <p className="font-bold text-3xl flex text-white">
                 You are all caught up <TiTick size={40} />
               </p>
               <div className="flex justify-center mt-5 flex-col gap-5">

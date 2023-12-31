@@ -11,11 +11,11 @@ type Props = {
 
 const PreviewCard = ({ r }: Props) => {
   return (
-    <div>
+    <div className="text-white">
       <Link
         to={`/profile/${r._id}`}
         key={r._id}
-        className="block max-w-lg border-b border-b-slate-400 p-4"
+        className="block max-w-lg border-b border-b-slate-400 p-4 glass mb-4"
       >
         <div className="flex gap-4 items-start">
           <div className="avatar">

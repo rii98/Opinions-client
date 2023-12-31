@@ -7,7 +7,16 @@
     <title>Vite + React + TS</title>
   </head>
   <body>
-    <div id="root" class="h-[100vh] overflow-scroll"></div>
+    <div
+      id="root"
+      class="h-[100vh] overflow-scroll no-scrollbar"
+      style="
+        background: url('public/background.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      "
+    ></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

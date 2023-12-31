@@ -128,7 +128,7 @@ const Card: React.FC<CardProps> = ({ post, home }) => {
   return (
     <div
       ref={cardRef}
-      className="w-full flex flex-col justify-between lg:max-w-[500px] h-[200px]  glass bg-purple-500 shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4 overflow-scroll"
+      className="w-full flex flex-col justify-between lg:max-w-[500px] h-[200px]  glass  shadow-md rounded-md p-4  text-slate-700 mb-10 sm:mb-0 py-4 overflow-scroll"
     >
       <div className="flex gap-4 flex-start">
         <Link to={`profile/${post.user._id}`}>
@@ -175,7 +175,12 @@ const Card: React.FC<CardProps> = ({ post, home }) => {
               <BiUpvote size={20} color="white" />
             )}
           </div>
-          <Link to={`/post/${post._id}/upvotes`}>...</Link>
+          <Link
+            to={`/post/${post._id}/upvotes`}
+            className="text-white font-semibold"
+          >
+            ...
+          </Link>
         </div>
       </div>
     </div>

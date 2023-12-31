@@ -114,11 +114,14 @@ const Profile = () => {
       <>
         <Header />
         <div className="p-4 sm:p-6">
-          <div className="skeleton max-w-[350px] h-[200px]"></div>
-          <div className="skeleton w-full my-4 h-[70px]"></div>
+          <div className="skeleton bg-indigo-950 glass opacity-80 max-w-[350px] h-[200px]"></div>
+          <div className="skeleton bg-indigo-950 glass opacity-80 w-full my-4 h-[70px]"></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-start">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((post) => (
-              <div className="skeleton w-full h-[250px]" key={post}></div>
+              <div
+                className="skeleton bg-indigo-950 glass opacity-80 w-full h-[250px]"
+                key={post}
+              ></div>
             ))}
           </div>
         </div>
@@ -129,7 +132,7 @@ const Profile = () => {
   return (
     <div>
       <Header />
-      <div>
+      <div className="text-white">
         {user ? (
           <div>
             <header className="flex gap-3 items-center py-2 px-4 sm:py-4 md:gap-10">
@@ -168,20 +171,20 @@ const Profile = () => {
                   {user.firstname + user.lastname}
                 </span>
               </div>
-              <a href="/" className="bg-gray-200 rounded-2xl text-xs p-1">
+              <a href="/" className="bg-red-500 rounded-2xl text-xs p-1">
                 {user.email}
               </a>
               <h1 className="text-sm pt-2 pb-4">{"You can add bio here"}</h1>
             </div>
-            <ul className=" border-t border-b border-gray-300 flex justify-around text-center py-2 ">
+            <ul className=" border-t border-b border-white flex justify-around text-center py-2 ">
               <li>
                 <span className="block font-semibold">{posts.length}</span>
-                <span className="text-gray-500 text-sm">posts</span>
+                <span className=" text-sm">posts</span>
               </li>
               <li>
                 <Link to={`/followers/${id}`}>
                   <span className="block font-semibold">{numberFollowers}</span>
-                  <span className="text-gray-500 text-sm">followers</span>
+                  <span className=" text-sm">followers</span>
                 </Link>
               </li>
               <li>
@@ -189,7 +192,7 @@ const Profile = () => {
                   <span className="block font-semibold">
                     {numberFollowings}
                   </span>
-                  <span className="text-gray-500 text-sm">following</span>
+                  <span className="text-sm">following</span>
                 </Link>
               </li>
             </ul>

@@ -13,12 +13,12 @@ const Login = () => {
   };
 
   return (
-    <section className="mt-8 p-4 bg-blue-100 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
-      <h1 className="font-bold text-xl text-center">Login</h1>
+    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
+      <h1 className="font-bold text-xl text-center text-white">Login</h1>
       <div className="pt-4">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col pb-3">
-            <label htmlFor="email" className="font-light text-slate-600 w-full">
+            <label htmlFor="email" className="font-light text-white w-full">
               Email
             </label>
             <input
@@ -34,7 +34,7 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col pb-3">
-            <label className="font-light text-slate-600" htmlFor="password">
+            <label className="font-light text-white" htmlFor="password">
               Password
             </label>
             <input
@@ -53,23 +53,25 @@ const Login = () => {
             <button
               type="submit"
               disabled={authLoading}
-              className="px-4 py-2 text-blue-800 font-semibold bg-blue-200 rounded-md "
+              className="px-4 py-2 text-white font-semibold bg-blue-900 rounded-md"
             >
               Login{" "}
             </button>
             {authLoading && (
-              <span className="pl-4 loading loading-bars loading-md"></span>
+              <span className="pl-4 loading loading-bars loading-md text-white"></span>
             )}
           </div>
-          <p className="text-center">
+          <p className="text-center text-white glass rounded-md p-2">
             Don't have account{" "}
-            <Link to="/signup" className="text-blue-700">
+            <Link to="/signup" className="text-white underline">
               SignUp
             </Link>
           </p>
         </form>
         {authError && (
-          <p className="text-center text-red-600 font-bold">{authError}</p>
+          <p className="text-center text-red-600 bg-white p-2 rounded-md mt-4 font-bold">
+            {authError}
+          </p>
         )}
       </div>
     </section>

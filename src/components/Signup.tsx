@@ -16,17 +16,17 @@ const Signup = () => {
   };
 
   return (
-    <section className="mt-8 p-4 bg-blue-100 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
+    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-[100px] shadow-2xl text-white">
       <h1 className="font-bold text-xl text-center">Create Account</h1>
       <div className="pt-4">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col pb-3">
-            <label htmlFor="email" className="font-light text-slate-600 w-full">
+            <label htmlFor="email" className="font-light  w-full">
               Email
             </label>
             <input
               required={true}
-              className="p-2 outline-none  rounded-md"
+              className="p-2 outline-none  rounded-md text-black"
               type="email"
               id="email"
               name="email"
@@ -37,12 +37,12 @@ const Signup = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 pb-3 justify-between">
             <div className="flex flex-col flex-1">
-              <label htmlFor="firstname" className="font-light text-slate-600">
+              <label htmlFor="firstname" className="font-light ">
                 Firstname
               </label>
               <input
                 required={true}
-                className="p-2 outline-none  rounded-md"
+                className="p-2 outline-none  rounded-md text-black"
                 id="firstname"
                 placeholder="eg. Riyaj"
                 value={firstname}
@@ -50,12 +50,12 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col flex-1">
-              <label className="font-light text-slate-600" htmlFor="lastname">
+              <label className="font-light " htmlFor="lastname">
                 Lastname
               </label>
               <input
                 required={true}
-                className="p-2 outline-none  rounded-md"
+                className="p-2 outline-none  rounded-md text-black"
                 id="lastname"
                 placeholder="eg. Bhandari"
                 value={lastname}
@@ -65,12 +65,12 @@ const Signup = () => {
           </div>
 
           <div className="flex flex-col pb-3">
-            <label className="font-light text-slate-600" htmlFor="password">
+            <label className="font-light " htmlFor="password">
               Password
             </label>
             <input
               required={true}
-              className="p-2 outline-none  rounded-md"
+              className="p-2 outline-none  rounded-md text-black"
               type="password"
               id="password"
               placeholder="Password"
@@ -80,15 +80,12 @@ const Signup = () => {
             />
           </div>
           <div className="flex flex-col pb-4">
-            <label
-              className="font-light text-slate-600"
-              htmlFor="confirmPassword"
-            >
+            <label className="font-light " htmlFor="confirmPassword">
               Confirm Password
             </label>
             <input
               required={true}
-              className="p-2 outline-none  rounded-md"
+              className="p-2 outline-none  rounded-md text-black"
               type="password"
               id="confirmPassword"
               placeholder="Confirm Password"
@@ -102,7 +99,7 @@ const Signup = () => {
             <button
               disabled={authLoading}
               type="submit"
-              className="px-4 py-2 text-blue-800 font-semibold bg-blue-200 rounded-md"
+              className="px-4 py-2 text-white font-semibold bg-blue-900 rounded-md"
             >
               Create Account
             </button>
@@ -110,14 +107,18 @@ const Signup = () => {
               <span className="pl-4 loading loading-bars loading-md"></span>
             )}
           </div>
-          <p className="text-center">
+          <p className="text-center glass p-2 rounded-md">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-700">
+            <Link to="/login" className="underline ">
               Login
             </Link>
           </p>
         </form>
-        <p className="text-center text-red-600 font-bold">{authError}</p>
+        {authError && (
+          <p className="text-center text-red-600 font-bold bg-white p-2 rounded-md mt-4">
+            {authError}
+          </p>
+        )}
       </div>
     </section>
   );
