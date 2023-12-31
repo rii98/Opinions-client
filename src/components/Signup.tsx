@@ -16,11 +16,11 @@ const Signup = () => {
   };
 
   return (
-    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-[100px] shadow-2xl text-white">
+    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[600px]  sm:mx-auto  mb-[100px] shadow-2xl text-white">
       <h1 className="font-bold text-xl text-center">Create Account</h1>
       <div className="pt-4">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col pb-3">
+          <div className="flex flex-col pb-6">
             <label htmlFor="email" className="font-light  w-full">
               Email
             </label>
@@ -35,7 +35,7 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 pb-3 justify-between">
+          <div className="flex flex-col sm:flex-row gap-4 pb-6 justify-between">
             <div className="flex flex-col flex-1">
               <label htmlFor="firstname" className="font-light ">
                 Firstname
@@ -64,7 +64,7 @@ const Signup = () => {
             </div>
           </div>
 
-          <div className="flex flex-col pb-3">
+          <div className="flex flex-col pb-6">
             <label className="font-light " htmlFor="password">
               Password
             </label>
@@ -79,7 +79,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex flex-col pb-4">
+          <div className="flex flex-col pb-6">
             <label className="font-light " htmlFor="confirmPassword">
               Confirm Password
             </label>
@@ -95,7 +95,7 @@ const Signup = () => {
             />
           </div>
 
-          <div className="flex justify-center pb-4">
+          <div className="flex justify-center pb-6">
             <button
               disabled={authLoading}
               type="submit"

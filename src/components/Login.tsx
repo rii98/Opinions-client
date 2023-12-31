@@ -13,11 +13,13 @@ const Login = () => {
   };
 
   return (
-    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[750px] lg:min-w-[800px] md:mx-auto md:min-w-[600px] mb-8 shadow-2xl ">
-      <h1 className="font-bold text-xl text-center text-white">Login</h1>
+    <section className="mt-8 p-4 rounded-lg mx-4  max-w-[600px]  sm:mx-auto  mb-[100px] shadow-2xl text-white">
+      <h1 className="font-bold text-xl text-center text-white md:text-3xl">
+        Login
+      </h1>
       <div className="pt-4">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col pb-3">
+          <div className="flex flex-col pb-4 sm:pb-6">
             <label htmlFor="email" className="font-light text-white w-full">
               Email
             </label>
@@ -33,7 +35,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="flex flex-col pb-3">
+          <div className="flex flex-col pb-4 sm:pb-6">
             <label className="font-light text-white" htmlFor="password">
               Password
             </label>
