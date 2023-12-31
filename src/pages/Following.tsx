@@ -39,9 +39,9 @@ const Following = () => {
     return (
       <div>
         <Header />
-        <main className="p-4 sm:p-0">
+        <main className="p-4  sm:p-0">
           <div className=" max-w-[500px] border rounded-md p-4 m-auto">
-            <h1 className="text-center font-semibold pb-4 border-b">
+            <h1 className="text-center font-semibold pb-4 border-b mb-4">
               following
             </h1>
 

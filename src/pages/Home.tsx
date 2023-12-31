@@ -24,14 +24,13 @@ const Home = () => {
     return (
       <>
         <Header />
-        <div className="max-w-xl m-auto p-4">
-          <div className="skeleton w-full h-[150px] mx-auto mb-4"></div>
-          <div className="skeleton w-16 h-10 ml-auto mb-6"></div>
-        </div>
 
-        <div className="flex flex-col gap-4 p-6 m-auto justify-center items-center">
+        <div className="flex flex-col gap-4 p-6 justify-center items-center m-auto">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((k) => (
-            <div key={k} className="skeleton w-[400px] h-[200px]"></div>
+            <div
+              key={k}
+              className="skeleton w-full mx-4 sm:max-w-[500px] h-[200px]"
+            ></div>
           ))}
         </div>
       </>

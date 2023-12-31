@@ -7,7 +7,9 @@ import PreviewCard from "./PreviewCard";
 const Search = () => {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     const controller = new AbortController();
     const signal = controller.signal;
     async function searchUser() {
@@ -29,6 +31,8 @@ const Search = () => {
       } catch (error) {
         setResult([]);
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
     searchUser();
@@ -36,6 +40,7 @@ const Search = () => {
       controller.abort();
     };
   }, [search]);
+
   return (
     <>
       <Header />
@@ -54,13 +59,18 @@ const Search = () => {
           </p>
         ) : (
           <div className="pt-6">
-            {result.map(
-              (
-                r: any //typescript adjustment left
-              ) => (
-                <PreviewCard r={r} />
-              )
-            )}
+            {loading
+              ? [1, 2, 3, 4, 5, 6, 7, 8, 10].map((f) => (
+                  <div
+                    className="skeleton max-w-[500px] h-14 mb-4"
+                    key={f}
+                  ></div>
+                ))
+              : result.map(
+                  (
+                    r: any //typescript adjustment left
+                  ) => <PreviewCard r={r} />
+                )}
           </div>
         )}
       </div>
