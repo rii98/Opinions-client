@@ -6,6 +6,9 @@ import LoginPage from "./pages/LoginPage";
 import Profile from "./pages/Profile";
 import CreateNew from "./pages/CreateNew";
 import Search from "./components/Search";
+import Followers from "./pages/Followers";
+import Following from "./pages/Following";
+import Upvotes from "./pages/Upvotes";
 
 const App = () => {
   return (
@@ -15,8 +18,11 @@ const App = () => {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/profile/:id" element={<Profile />} />
+      <Route path="/followers/:id" element={<Followers />} />
+      <Route path="/following/:id" element={<Following />} />
       <Route path="/post/create" element={<CreateNew />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/post/:postid/upvotes" element={<Upvotes />} />
     </Routes>
   );
 };

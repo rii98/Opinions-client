@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoIosContact } from "react-icons/io";
 
 import Header from "../components/Header";
@@ -57,7 +57,7 @@ const Profile = () => {
           },
         }
       );
-      console.log("Is following:", response.data);
+
       setIsfollowing(response.data.following);
     } catch (error) {
       console.log(error);
@@ -74,7 +74,7 @@ const Profile = () => {
           },
         }
       );
-      console.log(response.data);
+
       setPosts(response.data);
     } catch (error) {
       console.log(error);
@@ -113,7 +113,15 @@ const Profile = () => {
     return (
       <>
         <Header />
-        <div className="skeleton  max-w-2xl h-[200px] mt-6 mx-6 sm:mx-auto sm:h-[300px]"></div>
+        <div className="p-4 sm:p-6">
+          <div className="skeleton max-w-[350px] h-[200px]"></div>
+          <div className="skeleton w-full my-4 h-[70px]"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-start">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((post) => (
+              <div className="skeleton w-full h-[250px]" key={post}></div>
+            ))}
+          </div>
+        </div>
       </>
     );
   }
@@ -171,12 +179,18 @@ const Profile = () => {
                 <span className="text-gray-500 text-sm">posts</span>
               </li>
               <li>
-                <span className="block font-semibold">{numberFollowers}</span>
-                <span className="text-gray-500 text-sm">followers</span>
+                <Link to={`/followers/${id}`}>
+                  <span className="block font-semibold">{numberFollowers}</span>
+                  <span className="text-gray-500 text-sm">followers</span>
+                </Link>
               </li>
               <li>
-                <span className="block font-semibold">{numberFollowings}</span>
-                <span className="text-gray-500 text-sm">following</span>
+                <Link to={`/following/${id}`}>
+                  <span className="block font-semibold">
+                    {numberFollowings}
+                  </span>
+                  <span className="text-gray-500 text-sm">following</span>
+                </Link>
               </li>
             </ul>
           </div>

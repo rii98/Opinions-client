@@ -175,6 +175,7 @@ const Card: React.FC<CardProps> = ({ post, home }) => {
               <BiUpvote size={20} color="white" />
             )}
           </div>
+          <Link to={`/post/${post._id}/upvotes`}>...</Link>
         </div>
       </div>
     </div>
