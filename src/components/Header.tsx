@@ -5,7 +5,6 @@ import { IoIosAddCircle, IoIosSearch, IoIosCreate } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserCircle, FaTrophy } from "react-icons/fa";
 import { LuLogIn } from "react-icons/lu";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 const Header = () => {
   const { verified, setVerified } = useAuth();
